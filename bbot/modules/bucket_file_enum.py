@@ -1,5 +1,5 @@
 from bbot.modules.base import BaseModule
-import xml.etree.ElementTree as ET
+import defusedxml.ElementTree
 
 
 class bucket_file_enum(BaseModule):
@@ -39,7 +39,7 @@ class bucket_file_enum(BaseModule):
         status_code = getattr(response, "status_code", 0)
         if status_code == 200:
             content = response.text
-            root = ET.fromstring(content)
+            root = defusedxml.ElementTree.fromstring(content)
             namespace = {"s3": "http://s3.amazonaws.com/doc/2006-03-01/"}
             keys = [key.text for key in root.findall(".//s3:Key", namespace)]
             for key in keys:

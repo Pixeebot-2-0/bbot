@@ -19,6 +19,7 @@ from .url import *  # noqa F401
 from ... import errors
 from . import regexes as bbot_regexes
 from .names_generator import random_name, names, adjectives  # noqa F401
+import defusedxml.ElementTree
 
 log = logging.getLogger("bbot.core.helpers.misc")
 
@@ -897,7 +898,7 @@ def extract_params_xml(xml_data, compare_mode="getparam"):
     import xml.etree.ElementTree as ET
 
     try:
-        root = ET.fromstring(xml_data)
+        root = defusedxml.ElementTree.fromstring(xml_data)
     except ET.ParseError:
         return set()
 

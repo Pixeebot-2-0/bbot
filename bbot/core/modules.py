@@ -27,6 +27,7 @@ from .helpers.misc import (
     os_platform,
     mkdir,
 )
+import fickling
 
 
 log = logging.getLogger("bbot.module_loader")
@@ -217,7 +218,7 @@ class ModuleLoader:
             if self.preload_cache_file.is_file():
                 with suppress(Exception):
                     with open(self.preload_cache_file, "rb") as f:
-                        self._preload_cache = pickle.load(f)
+                        self._preload_cache = fickling.load(f)
         return self._preload_cache
 
     @preload_cache.setter

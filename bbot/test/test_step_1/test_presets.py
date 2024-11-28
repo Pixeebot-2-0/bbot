@@ -1,6 +1,7 @@
 from ..bbot_fixtures import *  # noqa F401
 
 from bbot.scanner import Scanner, Preset
+import fickling
 
 
 # FUTURE TODO:
@@ -618,10 +619,8 @@ class TestModule4(BaseModule):
     assert "wappalyzer" in preset.module_loader.preloaded()
     assert "testmodule1" not in preset.module_loader.preloaded()
 
-    import pickle
-
     with open(preset.module_loader.preload_cache_file, "rb") as f:
-        preloaded = pickle.load(f)
+        preloaded = fickling.load(f)
     assert "wappalyzer" in preloaded
     assert "testmodule1" not in preloaded
 
@@ -641,7 +640,7 @@ class TestModule4(BaseModule):
 
     preset.module_loader.save_preload_cache()
     with open(preset.module_loader.preload_cache_file, "rb") as f:
-        preloaded = pickle.load(f)
+        preloaded = fickling.load(f)
     assert "wappalyzer" in preloaded
     assert "testmodule1" in preloaded
     assert "testmodule2" in preloaded

@@ -2,7 +2,6 @@ import os
 import sys
 import copy
 import json
-import random
 import string
 import asyncio
 import logging
@@ -19,6 +18,7 @@ from .url import *  # noqa F401
 from ... import errors
 from . import regexes as bbot_regexes
 from .names_generator import random_name, names, adjectives  # noqa F401
+import secrets
 
 log = logging.getLogger("bbot.core.helpers.misc")
 
@@ -823,7 +823,7 @@ def rand_string(length=10, digits=True):
     pool = rand_pool
     if digits:
         pool = rand_pool_digits
-    return "".join([random.choice(pool) for _ in range(int(length))])
+    return "".join([secrets.choice(pool) for _ in range(int(length))])
 
 
 def truncate_string(s, n):
@@ -2518,7 +2518,7 @@ def weighted_shuffle(items, weights):
         weights = [weight / total for item, weight in pool]
 
         # Choose an index based on weight
-        chosen_index = random.choices(range(len(pool)), weights=weights, k=1)[0]
+        chosen_index = secrets.SystemRandom().choices(range(len(pool)), weights=weights, k=1)[0]
 
         # Add the chosen item to the shuffled list
         chosen_item, chosen_weight = pool.pop(chosen_index)

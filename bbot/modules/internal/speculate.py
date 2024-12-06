@@ -1,8 +1,8 @@
-import random
 import ipaddress
 
 from bbot.core.helpers import validators
 from bbot.modules.internal.base import BaseInternalModule
+import secrets
 
 
 class speculate(BaseInternalModule):
@@ -79,7 +79,7 @@ class speculate(BaseInternalModule):
         if event.type == "IP_RANGE" and self.range_to_ip:
             net = ipaddress.ip_network(event.data)
             ips = list(net)
-            random.shuffle(ips)
+            secrets.SystemRandom().shuffle(ips)
             for ip in ips:
                 await self.emit_event(
                     ip,

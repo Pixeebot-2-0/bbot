@@ -1,9 +1,8 @@
 from bbot.modules.base import BaseModule
-
-import random
 import string
 import json
 import base64
+import secrets
 
 
 class ffuf(BaseModule):
@@ -35,7 +34,7 @@ class ffuf(BaseModule):
 
     async def setup(self):
         self.proxy = self.scan.web_config.get("http_proxy", "")
-        self.canary = "".join(random.choice(string.ascii_lowercase) for i in range(10))
+        self.canary = "".join(secrets.choice(string.ascii_lowercase) for i in range(10))
         wordlist_url = self.config.get("wordlist", "")
         self.debug(f"Using wordlist [{wordlist_url}]")
         self.wordlist = await self.helpers.wordlist(wordlist_url)
@@ -95,7 +94,7 @@ class ffuf(BaseModule):
             canary_length = 4
             canary_list = []
             for i in range(0, 4):
-                canary_list.append("".join(random.choice(string.ascii_lowercase) for i in range(canary_length)))
+                canary_list.append("".join(secrets.choice(string.ascii_lowercase) for i in range(canary_length)))
                 canary_length += 2
 
             canary_temp_file = self.helpers.tempfile(canary_list, pipe=False)
@@ -287,7 +286,7 @@ class ffuf(BaseModule):
                                         f
                                         async for f in self.execute_ffuf(
                                             self.helpers.tempfile(
-                                                ["".join(random.choice(string.ascii_lowercase) for i in range(4))],
+                                                ["".join(secrets.choice(string.ascii_lowercase) for i in range(4))],
                                                 pipe=False,
                                             ),
                                             url,

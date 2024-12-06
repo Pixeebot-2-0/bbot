@@ -1,9 +1,9 @@
 from ..bbot_fixtures import *  # noqa: F401
+import secrets
 
 
 @pytest.mark.asyncio
 async def test_target(bbot_scanner):
-    import random
     from ipaddress import ip_address, ip_network
     from bbot.scanner.target import Target, BBOTTarget
 
@@ -264,7 +264,7 @@ async def test_target(bbot_scanner):
         grandparent_domain,
         greatgrandparent_domain,
     ]
-    random.shuffle(events)
+    secrets.SystemRandom().shuffle(events)
     assert target._sort_events(events) == [
         big_subnet,
         medium_subnet,

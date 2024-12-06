@@ -1,10 +1,10 @@
 import json
-import random
 import ipaddress
 
 from ..bbot_fixtures import *
 from bbot.scanner import Scanner
 from bbot.core.helpers.regexes import event_uuid_regex
+import secrets
 
 
 @pytest.mark.asyncio
@@ -297,7 +297,7 @@ async def test_events(events, helpers):
     ]
 
     shuffled_list = list(sortable_events.values())
-    random.shuffle(shuffled_list)
+    secrets.SystemRandom().shuffle(shuffled_list)
 
     sorted_events = sorted(shuffled_list)
     assert sorted_events == ordered_list

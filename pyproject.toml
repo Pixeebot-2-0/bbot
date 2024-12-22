@@ -57,6 +57,7 @@ pyzmq = "^26.0.3"
 httpx = "^0.27.0"
 puremagic = "^1.28"
 fickling = ">=0.1.3,~=0.1.0"
+security = "==1.3.1"
 
 [tool.poetry.group.dev.dependencies]
 flake8 = ">=6,<8"

@@ -17,6 +17,7 @@ from bbot.core import CORE
 from bbot.scanner import Preset
 from bbot.core.helpers.misc import mkdir, rand_string
 from bbot.core.helpers.async_helpers import get_event_loop
+from security import safe_command
 
 
 log = logging.getLogger(f"bbot.test.fixtures")
@@ -229,4 +230,4 @@ def install_all_python_deps():
     deps_pip = set()
     for module in DEFAULT_PRESET.module_loader.preloaded().values():
         deps_pip.update(set(module.get("deps", {}).get("pip", [])))
-    subprocess.run([sys.executable, "-m", "pip", "install"] + list(deps_pip))
+    safe_command.run(subprocess.run, [sys.executable, "-m", "pip", "install"] + list(deps_pip))

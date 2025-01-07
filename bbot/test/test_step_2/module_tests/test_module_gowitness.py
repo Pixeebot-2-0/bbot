@@ -45,8 +45,7 @@ class TestGowitness(ModuleTestBase):
         webscreenshots = [e for e in events if e.type == "WEBSCREENSHOT"]
         assert webscreenshots, "failed to raise WEBSCREENSHOT events"
         assert not any(
-            ["blob" in e.data for e in webscreenshots]
-        ), "blob was included in WEBSCREENSHOT data when it shouldn't have been"
+            "blob" in e.data for e in webscreenshots), "blob was included in WEBSCREENSHOT data when it shouldn't have been"
 
         screenshots_path = self.home_dir / "scans" / module_test.scan.name / "gowitness" / "screenshots"
         screenshots = list(screenshots_path.glob("*.png"))
@@ -102,5 +101,4 @@ class TestGoWitnessWithBlob(TestGowitness):
         webscreenshots = [e for e in events if e.type == "WEBSCREENSHOT"]
         assert webscreenshots, "failed to raise WEBSCREENSHOT events"
         assert all(
-            ["blob" in e.data and e.data["blob"] for e in webscreenshots]
-        ), "blob not found in WEBSCREENSHOT data"
+            "blob" in e.data and e.data["blob"] for e in webscreenshots), "blob not found in WEBSCREENSHOT data"

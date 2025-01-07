@@ -2391,7 +2391,7 @@ def in_exception_chain(e, exc_types):
         ...     if not in_exception_chain(e, (KeyboardInterrupt, asyncio.CancelledError)):
         ...         raise
     """
-    return any([isinstance(_, exc_types) for _ in get_exception_chain(e)])
+    return any(isinstance(_, exc_types) for _ in get_exception_chain(e))
 
 
 def get_traceback_details(e):

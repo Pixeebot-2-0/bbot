@@ -342,61 +342,61 @@ class ModuleLoader:
                     # class attributes that are dictionaries
                     if type(class_attr) == ast.Assign and type(class_attr.value) == ast.Dict:
                         # module options
-                        if any([target.id == "options" for target in class_attr.targets]):
+                        if any(target.id == "options" for target in class_attr.targets):
                             config.update(ast.literal_eval(class_attr.value))
                         # module options
-                        elif any([target.id == "options_desc" for target in class_attr.targets]):
+                        elif any(target.id == "options_desc" for target in class_attr.targets):
                             options_desc.update(ast.literal_eval(class_attr.value))
                         # module metadata
-                        elif any([target.id == "meta" for target in class_attr.targets]):
+                        elif any(target.id == "meta" for target in class_attr.targets):
                             meta = ast.literal_eval(class_attr.value)
 
                     # class attributes that are lists
                     if type(class_attr) == ast.Assign and type(class_attr.value) == ast.List:
                         # flags
-                        if any([target.id == "flags" for target in class_attr.targets]):
+                        if any(target.id == "flags" for target in class_attr.targets):
                             for flag in class_attr.value.elts:
                                 if type(flag.value) == str:
                                     flags.add(flag.value)
                         # watched events
-                        elif any([target.id == "watched_events" for target in class_attr.targets]):
+                        elif any(target.id == "watched_events" for target in class_attr.targets):
                             for event_type in class_attr.value.elts:
                                 if type(event_type.value) == str:
                                     watched_events.add(event_type.value)
                         # produced events
-                        elif any([target.id == "produced_events" for target in class_attr.targets]):
+                        elif any(target.id == "produced_events" for target in class_attr.targets):
                             for event_type in class_attr.value.elts:
                                 if type(event_type.value) == str:
                                     produced_events.add(event_type.value)
 
                         # bbot module dependencies
-                        elif any([target.id == "deps_modules" for target in class_attr.targets]):
+                        elif any(target.id == "deps_modules" for target in class_attr.targets):
                             for dep_module in class_attr.value.elts:
                                 if type(dep_module.value) == str:
                                     deps_modules.add(dep_module.value)
                         # python dependencies
-                        elif any([target.id == "deps_pip" for target in class_attr.targets]):
+                        elif any(target.id == "deps_pip" for target in class_attr.targets):
                             for dep_pip in class_attr.value.elts:
                                 if type(dep_pip.value) == str:
                                     deps_pip.append(dep_pip.value)
-                        elif any([target.id == "deps_pip_constraints" for target in class_attr.targets]):
+                        elif any(target.id == "deps_pip_constraints" for target in class_attr.targets):
                             for dep_pip in class_attr.value.elts:
                                 if type(dep_pip.value) == str:
                                     deps_pip_constraints.append(dep_pip.value)
                         # apt dependencies
-                        elif any([target.id == "deps_apt" for target in class_attr.targets]):
+                        elif any(target.id == "deps_apt" for target in class_attr.targets):
                             for dep_apt in class_attr.value.elts:
                                 if type(dep_apt.value) == str:
                                     deps_apt.append(dep_apt.value)
                         # bash dependencies
-                        elif any([target.id == "deps_shell" for target in class_attr.targets]):
+                        elif any(target.id == "deps_shell" for target in class_attr.targets):
                             for dep_shell in class_attr.value.elts:
                                 deps_shell.append(ast.literal_eval(dep_shell))
                         # ansible playbook
-                        elif any([target.id == "deps_ansible" for target in class_attr.targets]):
+                        elif any(target.id == "deps_ansible" for target in class_attr.targets):
                             ansible_tasks = ast.literal_eval(class_attr.value)
                         # shared/common module dependencies
-                        elif any([target.id == "deps_common" for target in class_attr.targets]):
+                        elif any(target.id == "deps_common" for target in class_attr.targets):
                             for dep_common in class_attr.value.elts:
                                 if type(dep_common.value) == str:
                                     deps_common.append(dep_common.value)

@@ -28,7 +28,7 @@ class ffuf(BaseModule):
 
     deps_common = ["ffuf"]
 
-    banned_characters = set([" "])
+    banned_characters = {" "}
     blacklist = ["images", "css", "image"]
 
     in_scope_only = True

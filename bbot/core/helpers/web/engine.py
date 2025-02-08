@@ -27,7 +27,8 @@ class HTTPEngine(EngineServer):
         "max_redirects",
     )
 
-    def __init__(self, socket_path, target, config={}, debug=False):
+    def __init__(self, socket_path, target, config=None, debug=False):
+        config = {} if config is None else config
         super().__init__(socket_path, debug=debug)
         self.target = target
         self.config = config

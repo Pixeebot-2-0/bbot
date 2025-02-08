@@ -63,7 +63,9 @@ class ModuleTestBase:
             self.events = []
             self.log = logging.getLogger(f"bbot.test.{module_test_base.name}")
 
-        def set_expect_requests(self, expect_args={}, respond_args={}):
+        def set_expect_requests(self, expect_args=None, respond_args=None):
+            expect_args = {} if expect_args is None else expect_args
+            respond_args = {} if respond_args is None else respond_args
             if "uri" not in expect_args:
                 expect_args["uri"] = "/"
             self.httpserver.expect_request(**expect_args).respond_with_data(**respond_args)

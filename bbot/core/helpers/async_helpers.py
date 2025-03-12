@@ -1,5 +1,4 @@
 import uuid
-import random
 import asyncio
 import logging
 import functools
@@ -7,13 +6,14 @@ from datetime import datetime
 from .misc import human_timedelta
 from cachetools import keys, LRUCache
 from contextlib import asynccontextmanager
+import secrets
 
 log = logging.getLogger("bbot.core.helpers.async_helpers")
 
 
 class ShuffleQueue(asyncio.Queue):
     def _put(self, item):
-        random_index = random.randint(0, self.qsize())
+        random_index = secrets.SystemRandom().randint(0, self.qsize())
         self._queue.insert(random_index, item)
 
     def _get(self):

@@ -1,6 +1,6 @@
-import random
 
 from .base import ModuleTestBase
+import secrets
 
 
 class TestBeVigil(ModuleTestBase):
@@ -30,7 +30,7 @@ class TestBeVigil(ModuleTestBase):
 
 class TestBeVigilMultiKey(TestBeVigil):
     api_keys = ["1234", "4321", "asdf", "fdsa"]
-    random.shuffle(api_keys)
+    secrets.SystemRandom().shuffle(api_keys)
     config_overrides = {"modules": {"bevigil": {"api_key": api_keys, "urls": True}}}
 
     async def setup_after_prep(self, module_test):

@@ -1,7 +1,6 @@
 # based on https://github.com/ElSicarius/interactsh-python/blob/main/sources/interactsh.py
 import json
 import base64
-import random
 import asyncio
 import logging
 import traceback
@@ -12,6 +11,7 @@ from Crypto.PublicKey import RSA
 from Crypto.Cipher import AES, PKCS1_OAEP
 
 from bbot.errors import InteractshError
+import secrets
 
 log = logging.getLogger("bbot.core.helpers.interactsh")
 
@@ -118,7 +118,7 @@ class Interactsh:
         encoded_public_key = base64.b64encode(self.public_key).decode("utf8")
 
         uuid = uuid4().hex.ljust(33, "a")
-        guid = "".join(i if i.isdigit() else chr(ord(i) + random.randint(0, 20)) for i in uuid)
+        guid = "".join(i if i.isdigit() else chr(ord(i) + secrets.SystemRandom().randint(0, 20)) for i in uuid)
 
         self.correlation_id = guid[:20]
         self.secret = str(uuid4())
@@ -131,7 +131,7 @@ class Interactsh:
                 headers["Authorization"] = self.token
             self.server_list = [str(self.custom_server)]
         else:
-            self.server_list = random.sample(server_list, k=len(server_list))
+            self.server_list = secrets.SystemRandom().sample(server_list, k=len(server_list))
         for server in self.server_list:
             log.info(f"Registering with interact.sh server: {server}")
             data = {

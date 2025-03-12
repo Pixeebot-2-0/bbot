@@ -3,6 +3,7 @@ import datetime
 import ipaddress
 
 from ..bbot_fixtures import *
+import secrets
 
 
 @pytest.mark.asyncio
@@ -771,14 +772,13 @@ def test_sync_to_async():
 
 @pytest.mark.asyncio
 async def test_async_helpers():
-    import random
     from bbot.core.helpers.misc import as_completed
 
     async def do_stuff(r):
         await asyncio.sleep(r)
         return r
 
-    random_ints = [random.random() for _ in range(1000)]
+    random_ints = [secrets.SystemRandom().random() for _ in range(1000)]
     tasks = [do_stuff(r) for r in random_ints]
     results = set()
     async for t in as_completed(tasks):

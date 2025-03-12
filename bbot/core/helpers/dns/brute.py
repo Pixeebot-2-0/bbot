@@ -1,8 +1,8 @@
 import json
-import random
 import asyncio
 import logging
 import subprocess
+import secrets
 
 
 class DNSBrute:
@@ -161,7 +161,7 @@ class DNSBrute:
         for i in range(0, max(0, n - 5)):
             d = delimiters[i % len(delimiters)]
             l = lengths[i % len(lengths)]
-            segments = list(random.choice(self.devops_mutations) for _ in range(l))
+            segments = list(secrets.choice(self.devops_mutations) for _ in range(l))
             segments.append(self.parent_helper.rand_string(length=8, digits=False))
             subdomain = d.join(segments)
             yield subdomain

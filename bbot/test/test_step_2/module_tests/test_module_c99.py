@@ -148,4 +148,4 @@ class TestC99AbortThreshold4(TestC99AbortThreshold3):
             "evilcorp.co.uk",
         }
         assert len(self.url_count) == 16
-        assert all([v == 1 for v in self.url_count.values()])
+        assert all(v == 1 for v in self.url_count.values())

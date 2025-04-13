@@ -53,7 +53,7 @@ class dnsbrute_mutations(BaseModule):
         # if we have a lot of rounds to make, don't try mutations on less-populated domains
         trimmed_found = []
         if found:
-            avg_subdomains = sum([len(subdomains) for domain, subdomains in found[:50]]) / len(found[:50])
+            avg_subdomains = sum(len(subdomains) for domain, subdomains in found[:50]) / len(found[:50])
             for i, (domain, subdomains) in enumerate(found):
                 # accept domains that are in the top 50 or have more than 5 percent of the average number of subdomains
                 if i < 50 or (len(subdomains) > 1 and len(subdomains) >= (avg_subdomains * 0.05)):

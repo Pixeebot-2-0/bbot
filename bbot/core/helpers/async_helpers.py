@@ -55,7 +55,7 @@ class TaskCounter:
 
     @property
     def value(self):
-        return sum([t.n for t in self.tasks.values()])
+        return sum(t.n for t in self.tasks.values())
 
     def count(self, task_name, n=1, _log=True):
         if callable(task_name):

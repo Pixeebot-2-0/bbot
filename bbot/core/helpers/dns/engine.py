@@ -35,7 +35,8 @@ class DNSEngine(EngineServer):
         99: "_mock_dns",
     }
 
-    def __init__(self, socket_path, config={}, debug=False):
+    def __init__(self, socket_path, config=None, debug=False):
+        config = {} if config is None else config
         super().__init__(socket_path, debug=debug)
 
         self.config = config

@@ -84,7 +84,8 @@ class ffuf(BaseModule):
             return False
         return True
 
-    async def baseline_ffuf(self, url, exts=[""], prefix="", suffix="", mode="normal"):
+    async def baseline_ffuf(self, url, exts=None, prefix="", suffix="", mode="normal"):
+        exts = [""] if exts is None else exts
         filters = {}
         for ext in exts:
             self.debug(f"running baseline for URL [{url}] with ext [{ext}]")
@@ -197,12 +198,14 @@ class ffuf(BaseModule):
         url,
         prefix="",
         suffix="",
-        exts=[""],
-        filters={},
+        exts=None,
+        filters=None,
         mode="normal",
         apply_filters=True,
         baseline=False,
     ):
+        exts = [""] if exts is None else exts
+        filters = {} if filters is None else filters
         for ext in exts:
             if mode == "normal":
                 self.debug("in mode [normal]")

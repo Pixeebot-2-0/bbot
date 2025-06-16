@@ -1,8 +1,8 @@
 import re
-import random
 import string
 
 from bbot.modules.deadly.ffuf import ffuf
+import secrets
 
 
 def find_common_prefixes(strings, minimum_set_length=4):
@@ -68,7 +68,7 @@ class ffuf_shortnames(ffuf):
 
     async def setup(self):
         self.proxy = self.scan.web_config.get("http_proxy", "")
-        self.canary = "".join(random.choice(string.ascii_lowercase) for i in range(10))
+        self.canary = "".join(secrets.choice(string.ascii_lowercase) for i in range(10))
         wordlist = self.config.get("wordlist", "")
         if not wordlist:
             wordlist = f"{self.helpers.wordlist_dir}/ffuf_shortname_candidates.txt"

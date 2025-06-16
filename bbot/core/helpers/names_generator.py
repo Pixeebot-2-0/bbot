@@ -1,4 +1,4 @@
-import random
+import secrets
 
 adjectives = [
     "abnormal",
@@ -687,8 +687,8 @@ names = [
 
 
 def random_name():
-    name = random.choice(names)
-    adjective = random.choice(adjectives)
+    name = secrets.choice(names)
+    adjective = secrets.choice(adjectives)
     if adjective == "unchained":
         scan_name = f"{name}_{adjective}"
     else:

@@ -121,7 +121,7 @@ class TestPortscan(ModuleTestBase):
         assert 1 == len([e for e in events if e.type == "OPEN_TCP_PORT" and e.data == "asdf.evilcorp.net:80"])
         assert 1 == len([e for e in events if e.type == "OPEN_TCP_PORT" and e.data == "dummy.asdf.evilcorp.net:80"])
         assert 1 == len([e for e in events if e.type == "OPEN_TCP_PORT" and e.data == "dummy.evilcorp.com:631"])
-        assert not any([e for e in events if e.type == "OPEN_TCP_PORT" and e.host == "dummy.www.evilcorp.com"])
+        assert not any(e for e in events if e.type == "OPEN_TCP_PORT" and e.host == "dummy.www.evilcorp.com")
 
 
 class TestPortscanPingFirst(TestPortscan):
